@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = Replace.NONE) // Usa tu MySQL real (o quítalo para usar memoria)
+@AutoConfigureTestDatabase(replace = Replace.NONE) 
 public class UsuarioRepositoryTest {
 
     @Autowired
