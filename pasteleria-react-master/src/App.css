@@ -1,0 +1,101 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+#products {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.product {
+  width: 250px;
+  max-width: 250px;
+  box-shadow: 0 0 5px #cdcdcd;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.product-image {
+  width: 250px;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.product-name {
+  font-weight: 600;
+}
+
+.product-price {
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px #e9e9e9 solid;
+}
+
+td>img {
+  width: 80px;
+}
+
+.items {
+  background: red;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: inline-block;
+  border-radius: 50%;
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 700;
+  box-shadow: 0 0 5px #cdcdcd;
+}
