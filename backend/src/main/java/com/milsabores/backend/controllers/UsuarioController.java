@@ -4,7 +4,7 @@ import com.milsabores.backend.models.Usuario;
 import com.milsabores.backend.repositories.UsuarioRepository;
 import com.milsabores.backend.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder; // <--- Importante
+import org.springframework.security.crypto.password.PasswordEncoder; 
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class UsuarioController {
     @PostMapping("/login")
     public Map<String, Object> iniciarSesion(@RequestBody Map<String, String> credenciales) {
         String email = credenciales.get("email");
-        String password = credenciales.get("password"); // Contraseña normal (texto plano)
+        String password = credenciales.get("password");
 
         Usuario usuario = usuarioRepository.findByEmail(email);
         Map<String, Object> respuesta = new HashMap<>();
