@@ -12,7 +12,13 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String run;
     private String nombre;
+    private String apellidos;
+    private String direccion;
+    private String region;
+    private String comuna;
+    private String fechaNacimiento;
 
     @Column(unique = true, nullable = false)
     private String email;
@@ -21,4 +27,6 @@ public class Usuario {
     private String password;
 
     private String rol;
+    private Integer edad;
+    private String telefono;
 }
