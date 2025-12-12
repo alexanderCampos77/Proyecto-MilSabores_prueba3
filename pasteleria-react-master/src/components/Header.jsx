@@ -1,55 +1,68 @@
-import React from 'react';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import CartWidget from './CartWidget.jsx'; // <--- ¡AQUÍ ESTABA EL ERROR, YA CORREGIDO!
+import React, { useState, useEffect } from 'react';
+import { Navbar, Container, Nav, Button, Badge } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 
-function Header({ carrito, usuario, cerrarSesion }) {
+function Header({ carrito = [] }) {
+  const navigate = useNavigate();
+  const [usuario, setUsuario] = useState(null);
+
+  useEffect(() => {
+    const usuarioGuardado = localStorage.getItem('usuario');
+    if (usuarioGuardado) {
+      setUsuario(JSON.parse(usuarioGuardado));
+    } else {
+      setUsuario(null);
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    setUsuario(null);
+    navigate('/login');
+  };
+
   return (
     <Navbar bg="light" expand="lg" className="shadow-sm mb-4">
       <Container>
-        <Navbar.Brand as={Link} to="/">
-          <img
-            src="/images/Captura de pantalla 2025-09-03 172212.png"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-            alt="Logo Pastelería Mil Sabores"
-          />
-          {' '}
-          Pastelería Mil Sabores
+        <Navbar.Brand as={Link} to="/" className="font-pacifico text-primary">
+          🍰 Pastelería Mil Sabores
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-            <Nav.Link as={Link} to="/">Productos</Nav.Link>
-            {!usuario && <Nav.Link as={Link} to="/registro">Registro</Nav.Link>}
+            <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
             <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
           </Nav>
-          <Nav className="align-items-center">
+          
+          <Nav className="align-items-center gap-2">
             {usuario ? (
               <>
-                <Navbar.Text className="me-3">
-                  Hola, {usuario.nombre}!
-                </Navbar.Text>
-                 <Button as={Link} to="/perfil" variant="outline-info" className="me-3">
-                  Mi Perfil
-                 </Button>
-                <Button variant="outline-secondary" onClick={cerrarSesion} className="me-3">
-                  Cerrar Sesión
+                <span className="text-muted fw-bold">Hola, {usuario.nombre}!</span>
+                
+                <Button variant="outline-info" size="sm" as={Link} to="/perfil" className="me-1">
+                  👤 Mi Perfil
+                </Button>
+
+                <Button variant="outline-danger" size="sm" onClick={handleLogout}>
+                  Salir
                 </Button>
               </>
             ) : (
               <>
-                <Button as={Link} to="/login" variant="outline-primary" className="me-2 mb-2 mb-lg-0">
+                <Button variant="outline-primary" size="sm" as={Link} to="/login" className="me-2">
                   Iniciar Sesión
                 </Button>
-                <Button as={Link} to="/registro" variant="primary" className="me-3 mb-2 mb-lg-0">
-                  Crear Cuenta
+                <Button variant="primary" size="sm" as={Link} to="/registro">
+                  Registrarse
                 </Button>
               </>
             )}
-             <CartWidget carrito={carrito} />
+
+            <Button variant="success" size="sm" as={Link} to="/carrito" className="ms-2">
+              🛒 Carrito <Badge bg="light" text="dark">{carrito.length}</Badge>
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
